@@ -13,6 +13,7 @@ track = JLD.load("./tracks/prague_line7.jld")["track"]
 
 # Inspect the track
 plot(track[1,:], track[2,:], label="Track", xlabel="UTM E [m]", ylabel="UTM N [m]")
+savefig("figs/track.png")
 
 # Build a KDTree for efficient nearest waypoint searches
 tracktree = KDTree(track)
@@ -56,9 +57,11 @@ speed_noisy = speed .+ 0.5 * randn(length(speed))
 # Compare with the clean data
 plot(x, y, label="Clean trajectory", xlabel="UTM E [m]", ylabel="UTM N [m]")
 plot!(x_noisy, y_noisy, label="Noisy trajectory")
+savefig("figs/noisy_position.png")
 
 plot(time, speed, label="Clean speed", xlabel="Time [s]", ylabel="Speed [m/s]")
 plot!(time, speed_noisy, label="Noisy speed")
+savefig("figs/noisy_speed.png")
 
 ## Set up the iterated extended Kalman filter for constant velocity model
 # state vector: [x, vx, y, vy]
@@ -137,10 +140,12 @@ speed_pred = [norm([vx, vy]) for (vx, vy) in zip(vx_pred, vy_pred)]
 plot(x, y, label="True trajectory", xlabel="UTM E [m]", ylabel="UTM N [m]")
 plot!(x_noisy, y_noisy, label="Noisy trajectory")
 plot!(x_pred, y_pred, label="Estimated trajectory")
+savefig("figs/predicted_position.png")
 
 plot(time, speed, label="True speed", xlabel="Time [s]", ylabel="Speed [m/s]")
 plot!(time, speed_noisy, label="Noisy speed")
 plot!(time, speed_pred, label="Estimated speed")
+savefig("figs/predicted_speed.png")
 
 ## Animation
 p = Progress(length(time), desc="Animating...")
@@ -154,4 +159,4 @@ anim = @animate for k in 1:length(time)
     covellipse!(track_pseudomeas[k].z, track_pseudomeas[k].Σ, label="Track constraint")
     covellipse!(GNSS_measurements[k].z[1:2], GNSS_measurements[k].Σ[[1,2],[1,2]], label="GNSS measurement")
 end
-gif(anim, "soft_constraint_example.gif", fps=1/sampling_period |> Int)
+gif(anim, "figs/soft_constraint_example.gif", fps=1/sampling_period |> Int)
