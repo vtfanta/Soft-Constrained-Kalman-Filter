@@ -1,0 +1,18 @@
+name = "ExtendedFiltering"
+uuid = "e78e798a-62ff-4d19-9300-51249f36b17c"
+authors = ["vtfanta <fantavit@fel.cvut.cz>"]
+version = "0.1.0"
+
+[deps]
+BlockDiagonals = "0a1fb500-61f7-11e9-3c65-f5ef3456f9f0"
+DSP = "717857b8-e6f2-59f4-9121-6e50c889abd2"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DataToolkit = "dc83c90b-d41d-4e55-bdb7-0fc919659999"
+Geodesy = "0ef565a4-170c-5f04-8de2-149903a85f3d"
+JLD = "4138dd39-2aa7-5051-a626-17a0bb65d9c8"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+NearestNeighbors = "b8a86587-4115-5ab1-83bc-aa920d37bbce"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
