@@ -103,7 +103,9 @@ We can see comparison between the clean data and the data with noise.
 Before the estimation, we need to set up the Kalman filter.
 For the estimation purposes, we will use the constant velocity model (CVM) which
 is characterized by the transition function of the form (for 1D)
-$$ \mathbf{x}_{k+1} = \begin{bmatrix} 1 & T_s \\ 0 & 1 \end{bmatrix} \mathbf{x}_k + \mathbf{w}_k,$$
+```math
+\mathbf{x}_{k+1} = \begin{bmatrix} 1 & T_s \\ 0 & 1 \end{bmatrix} \mathbf{x}_k + \mathbf{w}_k,
+```
 where $\mathbf{x}_k$ is the state vector at time $k$ and $\mathbf{w}_k$ is the process
 noise at time $k$. 
 
@@ -126,7 +128,9 @@ of this repository.
 
 Beside the transition equation, we also have the output equation for describing
 the measured quantities of the system.
-$$ \mathbf{z}_k = \mathbf{g}(\mathbf{x}_k) + \mathbf{v}_k, $$
+```math
+\mathbf{z}_k = \mathbf{g}(\mathbf{x}_k) + \mathbf{v}_k,
+```
 where $\mathbf{z}_k$ is the measurement vector, $\mathbf{g}$ is the output function and
 $\mathbf{v}_k$ is the measurement noise. 
 
