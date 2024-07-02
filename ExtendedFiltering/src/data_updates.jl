@@ -103,7 +103,7 @@ function data_update_iekf_lm(se0::StateEstimate{S}, meas_srcs, λ::T=1e-2,
         z = vcat([m.z for m in meas_srcs]...)
         
         B = Diagonal(H' / Σ * H + inv(se0.P))
-        P̃ = (I(length(x̂ᵢ)) - se0.P * (se0.P + 1/λ * inv(B))^(-1)) \ se0.P
+        P̃ = (I(length(x̂ᵢ)) - se0.P * (se0.P + 1/λ * inv(B))^(-1)) * se0.P
         K = P̃ * H' / (H * P̃ * H' + Σ)
 
         Δ = se0.x̂ - x̂ᵢ + K * (z - h - H * (se0.x̂ - x̂ᵢ)) - λ * (I(length(x̂ᵢ)) - K * H) * P̃ * B * (se0.x̂ - x̂ᵢ)
@@ -149,7 +149,7 @@ function data_update_iekf_lm_stepcontrol(se0::StateEstimate{S}, meas_srcs, λ::T
         z = vcat([m.z for m in meas_srcs]...)
         
         B = Diagonal(H' / Σ * H + inv(se0.P))
-        P̃ = (I(length(x̂ᵢ)) - se0.P * (se0.P + 1/λ * inv(B))^(-1)) \ se0.P
+        P̃ = (I(length(x̂ᵢ)) - se0.P * (se0.P + 1/λ * inv(B))^(-1)) * se0.P
         K = P̃ * H' / (H * P̃ * H' + Σ)
 
         Δ = se0.x̂ - x̂ᵢ + K * (z - h - H * (se0.x̂ - x̂ᵢ)) - λ * (I(length(x̂ᵢ)) - K * H) * P̃ * B * (se0.x̂ - x̂ᵢ)
